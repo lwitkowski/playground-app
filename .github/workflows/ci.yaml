@@ -1,0 +1,21 @@
+name: CI pipeline
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: deploy-to-test
+        uses: lwitkowski/playground-deploy-action@master
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        with:
+          gitops-repo: 'lwitkowski/playground-gitops'
+          target-file: 'sample-service/test/values.yaml'
+          docker-image-tag: '123'
