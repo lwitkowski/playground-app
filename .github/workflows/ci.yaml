@@ -18,7 +18,6 @@ jobs:
         with:
           gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/test/values.yaml'
-          docker-image-tag: ${GITHUB_SHA::6}
 
       - name: Deploy to production
         uses: lwitkowski/playground-deploy-action@master
@@ -27,3 +26,4 @@ jobs:
         with:
           gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/prod/values.yaml'
+          docker-image-tag: ${GITHUB_SHA::6}
