@@ -19,3 +19,12 @@ jobs:
           gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/test/values.yaml'
           docker-image-tag: ${GITHUB_SHA::6}
+
+      - id: deploy-to-prod
+        uses: lwitkowski/playground-deploy-action@master
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        with:
+          gitops-repo: 'lwitkowski/playground-gitops'
+          target-file: 'sample-service/prod/values.yaml'
+          docker-image-tag: ${GITHUB_SHA::6}
