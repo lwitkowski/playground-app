@@ -18,4 +18,4 @@ jobs:
         with:
           gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/test/values.yaml'
-          docker-image-tag: $GITHUB_SHA
+          docker-image-tag: ${GITHUB_SHA::6}
