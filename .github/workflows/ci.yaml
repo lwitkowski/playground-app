@@ -9,21 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_GITOPS_REPO: 'lwitkowski/playground-gitops'
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
     steps:
       - name: Deploy to test
         uses: lwitkowski/playground-deploy-action@master
-        env:
-          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/test/values.yaml'
 
       - name: Deploy to production
         uses: lwitkowski/playground-deploy-action@master
-        env:
-          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         with:
-          gitops-repo: 'lwitkowski/playground-gitops'
           target-file: 'sample-service/prod/values.yaml'
-          docker-image-tag: ${GITHUB_SHA::6}
